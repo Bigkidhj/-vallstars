@@ -890,7 +890,7 @@ GameObject:
   - component: {fileID: 183857481}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 238191031}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3560,7 +3560,7 @@ GameObject:
   - component: {fileID: 881831038}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4112,7 +4112,7 @@ GameObject:
   - component: {fileID: 1013714134}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4345,6 +4345,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamLeaders: []
   teamMembers: []
+  leaderNames:
+  - {fileID: 1013714134}
+  - {fileID: 1466479110}
+  - {fileID: 1747362571}
+  - {fileID: 1882215334}
+  - {fileID: 1281830145}
+  - {fileID: 183857481}
+  - {fileID: 1716021226}
+  - {fileID: 238191031}
+  - {fileID: 1106511317}
+  - {fileID: 881831038}
 --- !u!4 &1037688151
 Transform:
   m_ObjectHideFlags: 0
@@ -4766,7 +4777,7 @@ GameObject:
   - component: {fileID: 1106511317}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5206,7 +5217,7 @@ GameObject:
   - component: {fileID: 1281830145}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5823,7 +5834,7 @@ GameObject:
   - component: {fileID: 1466479110}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6316,7 +6327,7 @@ GameObject:
   - component: {fileID: 1716021226}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6531,7 +6542,7 @@ GameObject:
   - component: {fileID: 1747362571}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7105,7 +7116,7 @@ GameObject:
   - component: {fileID: 1882215334}
   m_Layer: 5
   m_Name: Leader_name
-  m_TagString: Untagged
+  m_TagString: LeaderName
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

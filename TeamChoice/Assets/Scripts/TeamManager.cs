@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class TeamManager : MonoBehaviour
 {
-    // ÆÀÀå Å¬·¡½º Á¤ÀÇ
+    // íŒ€ì¥ í´ë˜ìŠ¤ ì •ì˜
     [System.Serializable]
     public class TeamLeader
     {
@@ -18,7 +22,7 @@ public class TeamManager : MonoBehaviour
         }
     }
 
-    // ÆÀ¿ø Å¬·¡½º Á¤ÀÇ
+    // íŒ€ì› í´ë˜ìŠ¤ ì •ì˜
     [System.Serializable]
     public class TeamMember
     {
@@ -32,41 +36,43 @@ public class TeamManager : MonoBehaviour
         }
     }
 
-    // ÆÀÀå°ú ÆÀ¿ø ¸®½ºÆ®
+    // íŒ€ì¥ê³¼ íŒ€ì› ë¦¬ìŠ¤íŠ¸
     public List<TeamLeader> teamLeaders;
     public List<TeamMember> teamMembers;
+    // íŒ€ì¥ ì´ë¦„ ë¦¬ìŠ¤íŠ¸
+    public List<TMP_Text> leaderNames;
 
     public void Start()
     {
-        // ÆÀÀå ¸®½ºÆ® ÃÊ±âÈ­
+        // íŒ€ì¥ ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
         teamLeaders = new List<TeamLeader>
         {
-            new TeamLeader("ÆÀÀåA", 1),
-            new TeamLeader("ÆÀÀåB", 2),
-            new TeamLeader("ÆÀÀåC", 3),
+            new TeamLeader("íŒ€ì¥A", 0),
+            new TeamLeader("íŒ€ì¥B", 1),
+            new TeamLeader("íŒ€ì¥C", 2),
+            new TeamLeader("íŒ€ì¥D", 3),
+            new TeamLeader("íŒ€ì¥E", 4),
+            new TeamLeader("íŒ€ì¥F", 5),
+            new TeamLeader("íŒ€ì¥G", 6),
+            new TeamLeader("íŒ€ì¥H", 7),
+            new TeamLeader("íŒ€ì¥I", 8),
+            new TeamLeader("íŒ€ì¥J", 9)
         };
 
-        // ÆÀ¿ø ¸®½ºÆ® ÃÊ±âÈ­
+        // íŒ€ì› ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
         teamMembers = new List<TeamMember>
         {
-            new TeamMember("ÆÀ¿øA", 1),
-            new TeamMember("ÆÀ¿øB", 2),
-            new TeamMember("ÆÀ¿øC", 3),
-            new TeamMember("ÆÀ¿øD", 4),
-            new TeamMember("ÆÀ¿øE", 5)
+            new TeamMember("íŒ€ì›A", 1),
+            new TeamMember("íŒ€ì›B", 2),
+            new TeamMember("íŒ€ì›C", 3),
+            new TeamMember("íŒ€ì›D", 4),
+            new TeamMember("íŒ€ì›E", 5)
         };
 
-        // ÆÀÀå°ú ÆÀ¿ø ¸®½ºÆ® Ãâ·Â
-        Debug.Log("Team Leaders: ");
-        foreach(var leader in teamLeaders)
+        // íŒ€ì¥ ì´ë¦„ ë¦¬ìŠ¤íŠ¸ì˜ í…ìŠ¤íŠ¸ë¥¼ íŒ€ì¥ ë¦¬ìŠ¤íŠ¸ì— ìˆëŠ” ì´ë¦„ìœ¼ë¡œ ì„¤ì •
+        for (int i = 0; i < leaderNames.Count && i < teamLeaders.Count; i++)
         {
-            Debug.Log($"Name: {leader.name}, Order: {leader.order}");
-        }
-
-        Debug.Log("Team Members:");
-        foreach (var member in teamMembers)
-        {
-            Debug.Log($"Name: {member.name}, Order: {member.order}");
+            leaderNames[i].text = teamLeaders[i].name;
         }
     }
 }
