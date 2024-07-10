@@ -87,11 +87,26 @@ public class TeamManager : MonoBehaviour
         // 팀원 리스트 초기화
         teamMembers = new List<TeamMember>
         {
-            new TeamMember("팀원A", 1),
-            new TeamMember("팀원B", 2),
-            new TeamMember("팀원C", 3),
-            new TeamMember("팀원D", 4),
-            new TeamMember("팀원E", 5)
+            new TeamMember("팀원1", 0),
+            new TeamMember("팀원2", 1),
+            new TeamMember("팀원3", 2),
+            new TeamMember("팀원4", 3),
+            new TeamMember("팀원5", 4),
+            new TeamMember("팀원6", 5),
+            new TeamMember("팀원7", 6),
+            new TeamMember("팀원8", 7),
+            new TeamMember("팀원9", 8),
+            new TeamMember("팀원10", 9),
+            new TeamMember("팀원11", 10),
+            new TeamMember("팀원12", 11),
+            new TeamMember("팀원13", 12),
+            new TeamMember("팀원14", 13),
+            new TeamMember("팀원15", 14),
+            new TeamMember("팀원16", 15),
+            new TeamMember("팀원17", 16),
+            new TeamMember("팀원18", 17),
+            new TeamMember("팀원19", 18),
+            new TeamMember("팀원20", 19)
         };
 
         //각 팀 리스트에 팀장과 팀원 리스트를 할당, 단 팀장은 한명씩 할당되며 팀원 리스트는 비어있음
