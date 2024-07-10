@@ -53,6 +53,8 @@ public class TeamManager : MonoBehaviour
     // 팀장과 팀원 리스트
     public List<TeamLeader> teamLeaders;
     public List<TeamMember> teamMembers;
+    // 팀장 이미지 리스트
+    public List<Image> leaderImages;
     // 팀장 이름 리스트
     public List<TMP_Text> leaderNames;
     // 팀 리스트
@@ -127,5 +129,20 @@ public class TeamManager : MonoBehaviour
         {
             leaderNames[i].text = teamLeaders[i].name;
         }
+        //팀장 이미지 리스트의 이미지를 게임오브젝트와 이름이 같은 이미지를 에셋의 이미지 폴더 안에 있는 TeamLeader 폴더에서 찾아서 할당
+        for (int i = 0; i < leaderImages.Count && i < teamLeaders.Count; i++)
+        {
+            leaderImages[i].sprite = Resources.Load<Sprite>("Images/TeamLeader/" + teamLeaders[i].name);
+        }
+        // 첫번째 멤버 호출
+        LoadFirstMember();
     }
+
+    //teammembers에 있는 첫번째 팀원을 ChoiceManager의 teamMember에 할당
+    public void LoadFirstMember()
+    {
+        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
+        choiceManager.teamMember = teamMembers[0];
+    }
+
 }

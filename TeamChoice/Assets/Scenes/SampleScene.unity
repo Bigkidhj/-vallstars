@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 20052919}
   - component: {fileID: 20052918}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 87642880}
   - component: {fileID: 87642879}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1862,7 +1862,7 @@ GameObject:
   - component: {fileID: 520759841}
   - component: {fileID: 520759840}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2423,7 +2423,7 @@ GameObject:
   - component: {fileID: 641276033}
   - component: {fileID: 641276032}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2900,7 +2900,7 @@ GameObject:
   - component: {fileID: 765728705}
   - component: {fileID: 765728704}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3259,7 +3259,7 @@ GameObject:
   - component: {fileID: 855930079}
   - component: {fileID: 855930078}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3547,6 +3547,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875681498}
   m_CullTransparentMesh: 1
+--- !u!1 &876605153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876605155}
+  - component: {fileID: 876605154}
+  m_Layer: 0
+  m_Name: ChoiceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &876605154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876605153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df227eae507d934aafc27be1a3f6853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamManager: {fileID: 0}
+  teamMember:
+    name: 
+    order: 0
+--- !u!4 &876605155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876605153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &881831036
 GameObject:
   m_ObjectHideFlags: 0
@@ -4345,6 +4393,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamLeaders: []
   teamMembers: []
+  leaderImages:
+  - {fileID: 20052918}
+  - {fileID: 87642879}
+  - {fileID: 520759840}
+  - {fileID: 1217420492}
+  - {fileID: 1619576235}
+  - {fileID: 641276032}
+  - {fileID: 1602381367}
+  - {fileID: 855930078}
+  - {fileID: 2068417587}
+  - {fileID: 765728704}
   leaderNames:
   - {fileID: 1013714134}
   - {fileID: 1466479110}
@@ -4356,6 +4415,36 @@ MonoBehaviour:
   - {fileID: 238191031}
   - {fileID: 1106511317}
   - {fileID: 881831038}
+  teamA:
+    leader: []
+    members: []
+  teamB:
+    leader: []
+    members: []
+  teamC:
+    leader: []
+    members: []
+  teamD:
+    leader: []
+    members: []
+  teamE:
+    leader: []
+    members: []
+  teamF:
+    leader: []
+    members: []
+  teamG:
+    leader: []
+    members: []
+  teamH:
+    leader: []
+    members: []
+  teamI:
+    leader: []
+    members: []
+  teamJ:
+    leader: []
+    members: []
 --- !u!4 &1037688151
 Transform:
   m_ObjectHideFlags: 0
@@ -4365,7 +4454,7 @@ Transform:
   m_GameObject: {fileID: 1037688149}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 264.97098, y: 114.911575, z: -1.3116006}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4910,7 +4999,7 @@ GameObject:
   - component: {fileID: 1139975837}
   - component: {fileID: 1139975836}
   m_Layer: 5
-  m_Name: TeamMember
+  m_Name: TeamMemberBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5060,7 +5149,7 @@ GameObject:
   - component: {fileID: 1217420493}
   - component: {fileID: 1217420492}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6176,7 +6265,7 @@ GameObject:
   - component: {fileID: 1602381368}
   - component: {fileID: 1602381367}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6251,7 +6340,7 @@ GameObject:
   - component: {fileID: 1619576236}
   - component: {fileID: 1619576235}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7383,7 +7472,7 @@ GameObject:
   - component: {fileID: 2068417588}
   - component: {fileID: 2068417587}
   m_Layer: 5
-  m_Name: Leader
+  m_Name: Leader_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7878,3 +7967,4 @@ SceneRoots:
   - {fileID: 552935110}
   - {fileID: 20943111}
   - {fileID: 1037688151}
+  - {fileID: 876605155}

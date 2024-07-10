@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class ChoiceManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public TeamManager teamManager;
+    public TeamManager.TeamMember teamMember;
+    public void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //TeamManager를 찾아서 teamManager에 할당
+        teamManager = GameObject.Find("TeamManager").GetComponent<TeamManager>();
     }
 }
