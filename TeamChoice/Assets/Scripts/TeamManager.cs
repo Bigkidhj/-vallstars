@@ -62,6 +62,7 @@ public class TeamManager : MonoBehaviour
     public GameObject kickPanel;
     public List<Image> kickMemberImages;
     public List<TMP_Text> kickMemberNames;
+    public GameObject waitingList;
 
     private const int MaxMembersPerTeam = 2;
 
@@ -217,6 +218,7 @@ public class TeamManager : MonoBehaviour
         team.members.Clear();
         // waitingTeamMembers 리스트에 kickmembers 리스트에서 memberIndex 차례에 해당하는 팀원을 추가
         waitingTeamMembers.Add(kickMembers[memberIndex]);
+        UpdateWaitingUI(kickMembers[memberIndex]);
         // kickMembers 리스트에서 memberIndex 차례에 해당하는 팀원을 삭제
         kickMembers.RemoveAt(memberIndex);
         // kickMembers 리스트 정렬
@@ -251,8 +253,20 @@ public class TeamManager : MonoBehaviour
             Debug.LogError("Failed to load sprite at path: " + imagePath);
             return;
         }
-        Debug.Log(teamIndex + memberIndex);
         teamMemberImages[teamIndex][memberIndex].sprite = memberSprite;
         teamMemberNames[teamIndex][memberIndex].text = member.name;
+    }
+
+    void UpdateWaitingUI(TeamMember memeber)
+    {
+        // waitingTeamMembers 리스트에 있는 팀원을 prefabs로 생성하되, 이미 생성된 prefabs가 있다면 그대로 사용
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/WaitingMember");
+        // teamMember는 waitingList의 자식으로 생성
+        GameObject teamMember = Instantiate(prefab, waitingList.transform);
+        // teamMember의 자식 오브젝트에서 이미지와 이름을 찾아서 설정
+        Image image = teamMember.transform.Find("Image").GetComponent<Image>();
+        image.sprite = Resources.Load<Sprite>("Images/TeamMember/" + memeber.imageName);
+        TMP_Text name = teamMember.transform.Find("Name").GetComponent<TMP_Text>();
+        name.text = memeber.name;
     }
 }

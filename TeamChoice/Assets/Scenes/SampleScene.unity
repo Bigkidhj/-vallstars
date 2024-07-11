@@ -4713,6 +4713,7 @@ GameObject:
   - component: {fileID: 909352149}
   - component: {fileID: 909352151}
   - component: {fileID: 909352150}
+  - component: {fileID: 909352152}
   m_Layer: 5
   m_Name: WaitingList
   m_TagString: Untagged
@@ -4752,7 +4753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.45, g: 0.45, b: 0.45, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4777,6 +4778,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909352148}
   m_CullTransparentMesh: 1
+--- !u!114 &909352152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909352148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 8
+    m_Right: 10
+    m_Top: 30
+    m_Bottom: 10
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 5, y: 5}
+  m_Constraint: 1
+  m_ConstraintCount: 6
 --- !u!1 &937046714
 GameObject:
   m_ObjectHideFlags: 0
@@ -5669,6 +5694,7 @@ MonoBehaviour:
   - {fileID: 1434759481}
   - {fileID: 970660448}
   - {fileID: 550570281}
+  waitingList: {fileID: 909352148}
 --- !u!4 &1037688151
 Transform:
   m_ObjectHideFlags: 0
