@@ -24,6 +24,7 @@ public class ChoiceManager : MonoBehaviour
         } else
         {
             Debug.Log("더 이상 팀원이 없습니다.");
+            teamManager.FindTeamWithLessThanTwoMembers();
         }
     }
 
