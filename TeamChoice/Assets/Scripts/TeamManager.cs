@@ -52,11 +52,16 @@ public class TeamManager : MonoBehaviour
 
     public List<TeamLeader> teamLeaders;
     public List<TeamMember> teamMembers;
+    public List<TeamMember> kickMembers;
+    public List<TeamMember> waitingTeamMembers;
     public List<Image> leaderImages;
     public List<TMP_Text> leaderNames;
     public List<Team> teams;
     public List<List<Image>> teamMemberImages;
     public List<List<TMP_Text>> teamMemberNames;
+    public GameObject kickPanel;
+    public List<Image> kickMemberImages;
+    public List<TMP_Text> kickMemberNames;
 
     private const int MaxMembersPerTeam = 2;
 
@@ -178,7 +183,64 @@ public class TeamManager : MonoBehaviour
             UpdateTeamUI(teamIndex, team.members.Count - 1, choiceManager.currentTeamMember);
             choiceManager.LoadNextMember();
         }
+        else if (team != null && team.members.Count == MaxMembersPerTeam)
+        {
+            choiceManager.currentTeamIndex = teamIndex;
+            OpenKickPanel(teamIndex);
+        }
     }
+
+    public void OpenKickPanel(int teamIndex)
+    {
+        kickPanel.SetActive(true);
+        // 현재 선택한 팀 호출
+        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
+        Team team = teams.FirstOrDefault(t => t.leader[0].order == teamIndex);
+        // kickMemberNames에 teamindex에 해당하는 팀원 이름과 choiceManager의 currentTeamMember 이름을 넣어줌
+        kickMemberNames[0].text = team.members[0].name;
+        kickMemberNames[1].text = team.members[1].name;
+        kickMemberNames[2].text = choiceManager.currentTeamMember.name;
+        // kickMemberImages에 teamindex에 해당하는 팀원 이미지와 choiceManager의 currentTeamMember 이미지를 넣어줌
+        kickMemberImages[0].sprite = Resources.Load<Sprite>("Images/TeamMember/" + team.members[0].imageName);
+        kickMemberImages[1].sprite = Resources.Load<Sprite>("Images/TeamMember/" + team.members[1].imageName);
+        kickMemberImages[2].sprite = Resources.Load<Sprite>("Images/TeamMember/" + choiceManager.currentTeamMember.imageName);
+        // kickMembers에 teamindex에 해당하는 팀원과 chiocemanager의 currentTeamMember를 넣어줌
+        kickMembers = new List<TeamMember> { team.members[0], team.members[1], choiceManager.currentTeamMember };
+    }
+
+    // kickmembers 리스트에 있는 지정한 멤버를 waitingMembers 리스트로 이동시키고 나머지 팀원은 기존에 있던 팀 리스트로 이동
+    public void KickMemberFromTeam(int memberIndex)
+    {
+        // kickMembers 리스트에 있는 팀원을 teams 리스트에서 삭제
+        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
+        Team team = teams.FirstOrDefault(t => t.leader[0].order == choiceManager.currentTeamIndex);
+        team.members.Clear();
+        // waitingTeamMembers 리스트에 kickmembers 리스트에서 memberIndex 차례에 해당하는 팀원을 추가
+        waitingTeamMembers.Add(kickMembers[memberIndex]);
+        // kickMembers 리스트에서 memberIndex 차례에 해당하는 팀원을 삭제
+        kickMembers.RemoveAt(memberIndex);
+        // kickMembers 리스트 정렬
+        kickMembers.Sort((a, b) => a.order.CompareTo(b.order));
+        // kickMemers 리스트에 있는 팀원을 teams 리스트에 추가
+        for (int i = 0; i < kickMembers.Count; i++)
+        {
+            team.members.Add(kickMembers[i]);
+            UpdateTeamUI(choiceManager.currentTeamIndex, i, kickMembers[i]);
+        }
+        // kickMembers 리스트 초기화
+        kickMembers.Clear();
+        // kickPanel 비활성화
+        kickPanel.SetActive(false);
+        // 팀원 UI 업데이트
+        for (int i = 0; i < team.members.Count; i++)
+        {
+            UpdateTeamUI(choiceManager.currentTeamIndex, i, team.members[i]);
+        }
+        choiceManager.LoadNextMember();
+        // choiceManager의 currentTeamIndex 초기화
+        choiceManager.currentTeamIndex = 10;
+    }
+
 
     private void UpdateTeamUI(int teamIndex, int memberIndex, TeamMember member)
     {

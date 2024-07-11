@@ -7,6 +7,7 @@ public class ChoiceManager : MonoBehaviour
     public TeamManager teamManager;
     public TeamManager.TeamMember currentTeamMember;
     public int currentMemberIndex = 0;
+    public int currentTeamIndex = 10;
     public void Start()
     {
         //TeamManager를 찾아서 teamManager에 할당
@@ -31,5 +32,11 @@ public class ChoiceManager : MonoBehaviour
     public void AddMemberToTeam(int TeamIndex)
     {
         teamManager.AddMemberToTeam(TeamIndex);
+    }
+
+    // teamManager의 kickmembers 리스트에 있는 특정 멤버를 waitingMembers 리스트로 이동시키고 나머지 팀원은 기존에 있던 팀 리스트로 이동
+    public void KickMemberFromTeam(int memberIndex)
+    {
+        teamManager.KickMemberFromTeam(memberIndex);
     }
 }
