@@ -182,6 +182,10 @@ public class TeamManager : MonoBehaviour
         {
             team.members.Add(choiceManager.currentTeamMember);
             UpdateTeamUI(teamIndex, team.members.Count - 1, choiceManager.currentTeamMember);
+            if(choiceManager.currentMemberIndex == 19)
+            {
+                choiceManager.currentMemberIndex++;
+            }
             choiceManager.LoadNextMember();
         }
         else if (team != null && team.members.Count == MaxMembersPerTeam)
@@ -237,6 +241,10 @@ public class TeamManager : MonoBehaviour
         for (int i = 0; i < team.members.Count; i++)
         {
             UpdateTeamUI(choiceManager.currentTeamIndex, i, team.members[i]);
+        }
+        if (choiceManager.currentMemberIndex == 19)
+        {
+            choiceManager.currentMemberIndex++;
         }
         choiceManager.LoadNextMember();
         // choiceManager의 currentTeamIndex 초기화

@@ -21,8 +21,7 @@ public class ChoiceManager : MonoBehaviour
         {
             currentMemberIndex++;
             teamManager.LoadNextMember(currentMemberIndex);
-        }
-        else
+        } else
         {
             Debug.Log("더 이상 팀원이 없습니다.");
         }
@@ -31,12 +30,26 @@ public class ChoiceManager : MonoBehaviour
     // 현재 teamMember를 teamManager의 특정 Team 안에 있는 teamMembers 리스트에 추가
     public void AddMemberToTeam(int TeamIndex)
     {
-        teamManager.AddMemberToTeam(TeamIndex);
+        if(currentMemberIndex <= 19)
+        {
+            teamManager.AddMemberToTeam(TeamIndex);
+        }
+        else
+        {
+            Debug.Log("더 이상 팀원이 없습니다. 멤버를 추가할 수 없습니다.");
+        }
     }
 
     // teamManager의 kickmembers 리스트에 있는 특정 멤버를 waitingMembers 리스트로 이동시키고 나머지 팀원은 기존에 있던 팀 리스트로 이동
     public void KickMemberFromTeam(int memberIndex)
     {
-        teamManager.KickMemberFromTeam(memberIndex);
+        if (currentMemberIndex <= 19)
+        {
+            teamManager.KickMemberFromTeam(memberIndex);
+        }
+        else
+        {
+            Debug.Log("더 이상 팀원이 없습니다. 멤버를 내보낼 수 없습니다.");
+        }
     }
 }
