@@ -8,6 +8,9 @@ public class ChoiceManager : MonoBehaviour
     public TeamManager.TeamMember currentTeamMember;
     public int currentMemberIndex = 0;
     public int currentTeamIndex = 10;
+    public GameObject page0;
+    public GameObject page1;
+
     public void Start()
     {
         //TeamManager를 찾아서 teamManager에 할당
@@ -24,7 +27,10 @@ public class ChoiceManager : MonoBehaviour
         } else
         {
             Debug.Log("더 이상 팀원이 없습니다.");
-            teamManager.FindTeamWithLessThanTwoMembers();
+            if (teamManager.waitingTeamMembers.Count > 0)
+            {
+                teamManager.FindTeamWithLessThanTwoMembers();
+            }            
         }
     }
 
@@ -52,5 +58,12 @@ public class ChoiceManager : MonoBehaviour
         {
             Debug.Log("더 이상 팀원이 없습니다. 멤버를 내보낼 수 없습니다.");
         }
+    }
+
+    public void ShowPage1()
+    {
+        page0.SetActive(false);
+        page1.SetActive(true);
+        teamManager.StartPickWaitingMember();
     }
 }
