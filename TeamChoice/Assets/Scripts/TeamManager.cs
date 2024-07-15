@@ -70,6 +70,7 @@ public class TeamManager : MonoBehaviour
     List<Team> teamsWithOneMember;
     public ChoiceManager choiceManager;
     public ResultManager resultManager;
+    public Image introduceImage;
 
     private const int MaxMembersPerTeam = 2;
 
@@ -169,6 +170,7 @@ public class TeamManager : MonoBehaviour
     {
         // 첫번째 멤버를 불러오고 초기화
         choiceManager.currentTeamMember = teamMembers[0];
+        introduceImage.sprite = Resources.Load<Sprite>("Images/IntroduceImage/" + choiceManager.currentTeamMember.imageName);
         Debug.Log(choiceManager.currentTeamMember.name);
         Debug.Log(choiceManager.currentTeamMember.order);
     }
@@ -177,6 +179,7 @@ public class TeamManager : MonoBehaviour
     {
         // 다음 멤버를 불러오고 초기화
         choiceManager.currentTeamMember = teamMembers[index];
+        introduceImage.sprite = Resources.Load<Sprite>("Images/IntroduceImage/" + choiceManager.currentTeamMember.imageName);
         Debug.Log(choiceManager.currentTeamMember.name);
         Debug.Log(choiceManager.currentTeamMember.order);
     }
@@ -352,14 +355,14 @@ public class TeamManager : MonoBehaviour
             //첫번째 teamWithZeroMembers의 팀장을 선택
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithZeroMembers[0].leader[0].name).leader[0].order;
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
-            infoText.text = teamsWithZeroMembers[0].leader[0].name + "팀장님, 팀원을 선택해주세요.";
+            infoText.text = teamsWithZeroMembers[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
         }
         else if (teamsWithOneMember.Count > 0)
         {
             //첫번째 teamWithOneoMember의 팀장을 선택
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithOneMember[0].leader[0].name).leader[0].order;
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
-            infoText.text = teamsWithOneMember[0].leader[0].name + "팀장님, 팀원을 선택해주세요.";
+            infoText.text = teamsWithOneMember[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
         }
 
         // WaitingMember_Choice라는 프리팹을 생성, Page1의 자식인 MemberGrid의 자식으로 생성, waitingTeamMembers의 수만큼 생성
@@ -448,7 +451,7 @@ public class TeamManager : MonoBehaviour
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithZeroMembers[0].leader[0].name).leader[0].order;
 
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
-            infoText.text = teamsWithZeroMembers[0].leader[0].name + "팀장님, 팀원을 선택해주세요.";
+            infoText.text = teamsWithZeroMembers[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
         }
         else if (teamsWithOneMember.Count > 0)
         {
@@ -456,7 +459,7 @@ public class TeamManager : MonoBehaviour
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithOneMember[0].leader[0].name).leader[0].order;
 
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
-            infoText.text = teamsWithOneMember[0].leader[0].name + "팀장님, 팀원을 선택해주세요.";
+            infoText.text = teamsWithOneMember[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
         }
         else
         {

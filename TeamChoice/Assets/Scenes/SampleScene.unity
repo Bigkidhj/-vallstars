@@ -10484,6 +10484,7 @@ MonoBehaviour:
   showResultPanel: {fileID: 1642803433}
   choiceManager: {fileID: 0}
   resultManager: {fileID: 0}
+  introduceImage: {fileID: 1139975836}
 --- !u!4 &1037688151
 Transform:
   m_ObjectHideFlags: 0
@@ -11860,7 +11861,7 @@ GameObject:
   - component: {fileID: 1139975837}
   - component: {fileID: 1139975836}
   m_Layer: 5
-  m_Name: TeamMemberBackground
+  m_Name: IntroduceImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
