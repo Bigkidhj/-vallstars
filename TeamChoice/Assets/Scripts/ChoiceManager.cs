@@ -6,10 +6,12 @@ public class ChoiceManager : MonoBehaviour
 {
     public TeamManager teamManager;
     public TeamManager.TeamMember currentTeamMember;
+    public ResultManager resultManager;
     public int currentMemberIndex = 0;
     public int currentTeamIndex = 10;
     public GameObject page0;
     public GameObject page1;
+    public GameObject resultCanvas;
 
     public void Start()
     {
@@ -30,7 +32,11 @@ public class ChoiceManager : MonoBehaviour
             if (teamManager.waitingTeamMembers.Count > 0)
             {
                 teamManager.FindTeamWithLessThanTwoMembers();
-            }            
+            }
+            else
+            {
+               ShowResultPage();
+            }
         }
     }
 
@@ -65,5 +71,11 @@ public class ChoiceManager : MonoBehaviour
         page0.SetActive(false);
         page1.SetActive(true);
         teamManager.StartPickWaitingMember();
+    }
+
+    public void ShowResultPage()
+    {
+        resultCanvas.SetActive(true);
+        resultManager.InitializeResultUI();
     }
 }

@@ -64,14 +64,19 @@ public class TeamManager : MonoBehaviour
     public List<TMP_Text> kickMemberNames;
     public GameObject waitingList;
     public GameObject pickWaitngMemberPanel;
+    public GameObject showResultPanel;
     List<Team> teamsWithLessThanTwoMembers;
     List<Team> teamsWithZeroMembers;
     List<Team> teamsWithOneMember;
+    public ChoiceManager choiceManager;
+    public ResultManager resultManager;
 
     private const int MaxMembersPerTeam = 2;
 
     public void Start()
     {
+        resultManager = GameObject.Find("ResultManager").GetComponent<ResultManager>();
+        choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         // 팀장, 팀원, 팀 정보 초기화
         InitializeTeams();
         InitializeUI();
@@ -163,7 +168,6 @@ public class TeamManager : MonoBehaviour
     public void LoadFirstMember()
     {
         // 첫번째 멤버를 불러오고 초기화
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         choiceManager.currentTeamMember = teamMembers[0];
         Debug.Log(choiceManager.currentTeamMember.name);
         Debug.Log(choiceManager.currentTeamMember.order);
@@ -172,7 +176,6 @@ public class TeamManager : MonoBehaviour
     public void LoadNextMember(int index)
     {
         // 다음 멤버를 불러오고 초기화
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         choiceManager.currentTeamMember = teamMembers[index];
         Debug.Log(choiceManager.currentTeamMember.name);
         Debug.Log(choiceManager.currentTeamMember.order);
@@ -181,7 +184,6 @@ public class TeamManager : MonoBehaviour
     public void AddMemberToTeam(int teamIndex)
     {
         // 팀에 멤버 추가
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         Team team = teams.FirstOrDefault(t => t.leader[0].order == teamIndex);
 
         if (team != null && team.members.Count < MaxMembersPerTeam)
@@ -206,7 +208,6 @@ public class TeamManager : MonoBehaviour
     {
         kickPanel.SetActive(true);
         // 현재 선택한 팀 호출
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         Team team = teams.FirstOrDefault(t => t.leader[0].order == teamIndex);
         // kickMemberNames에 teamindex에 해당하는 팀원 이름과 choiceManager의 currentTeamMember 이름을 넣어줌
         kickMemberNames[0].text = team.members[0].name;
@@ -224,7 +225,6 @@ public class TeamManager : MonoBehaviour
     public void KickMemberFromTeam(int memberIndex)
     {
         // kickMembers 리스트에 있는 팀원을 teams 리스트에서 삭제
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         Team team = teams.FirstOrDefault(t => t.leader[0].order == choiceManager.currentTeamIndex);
         team.members.Clear();
         // waitingTeamMembers 리스트에 kickmembers 리스트에서 memberIndex 차례에 해당하는 팀원을 추가
@@ -288,7 +288,6 @@ public class TeamManager : MonoBehaviour
     // ChoiceManager의 currentTeamIndex가 19나 20일 때, members의 수가 2보다 적은 team을 모두 찾는다.
     public void FindTeamWithLessThanTwoMembers()
     {
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         teamsWithLessThanTwoMembers = teams.Where(t => t.members.Count < MaxMembersPerTeam).ToList();
         // teamsWithLessThanTwoMembers 리스트를 members.Count가 적은 순으로 정렬
         teamsWithLessThanTwoMembers.Sort((a, b) => a.members.Count.CompareTo(b.members.Count));
@@ -301,42 +300,67 @@ public class TeamManager : MonoBehaviour
         teamsWithOneMember = teamsWithOneMember.OrderBy(t => Random.Range(0, 100)).ToList();
         pickWaitngMemberPanel.SetActive(true);
 
-        // teamsWithZeroMembers의 리스트를 하나의 TMP_Text에 전부 표시
-        TMP_Text zeroMemberText = pickWaitngMemberPanel.transform.Find("Page0/TeamWithZeroMembers").GetComponent<TMP_Text>();
-        zeroMemberText.text = "팀원이 0명인 팀장은 ";
-        for (int i = 0; i < teamsWithZeroMembers.Count; i++)
+        if(teamsWithZeroMembers.Count > 0)
         {
-            zeroMemberText.text += teamsWithZeroMembers[i].leader[0].name;
-            if (i < teamsWithZeroMembers.Count - 1)
+            // teamsWithZeroMembers의 리스트를 하나의 TMP_Text에 전부 표시
+            TMP_Text zeroMemberText = pickWaitngMemberPanel.transform.Find("Page0/TeamWithZeroMembers").GetComponent<TMP_Text>();
+            zeroMemberText.text = "팀원이 0명인 팀장은 ";
+            for (int i = 0; i < teamsWithZeroMembers.Count; i++)
             {
-                zeroMemberText.text += ", ";
+                zeroMemberText.text += teamsWithZeroMembers[i].leader[0].name;
+                if (i < teamsWithZeroMembers.Count - 1)
+                {
+                    zeroMemberText.text += ", ";
+                }
             }
-        }
-        zeroMemberText.text += " 입니다.";
+            zeroMemberText.text += " 입니다.";
 
-        // teamsWithOneMember의 리스트를 하나의 TMP_Text에 전부 표시
-        TMP_Text oneMemberText = pickWaitngMemberPanel.transform.Find("Page0/TeamWithOneMember").GetComponent<TMP_Text>();
-        oneMemberText.text = "팀원이 1명인 팀장은 ";
-        for (int i = 0; i < teamsWithOneMember.Count; i++)
-        {
-            oneMemberText.text += teamsWithOneMember[i].leader[0].name;
-            if (i < teamsWithOneMember.Count - 1)
-            {
-                oneMemberText.text += ", ";
-            }
         }
-        oneMemberText.text += " 입니다.";
+        else
+        {
+            TMP_Text zeroMemberText = pickWaitngMemberPanel.transform.Find("Page0/TeamWithZeroMembers").GetComponent<TMP_Text>();
+            zeroMemberText.text = "팀원이 0명인 팀장은 없습니다.";
+        }
+
+        if (teamsWithOneMember.Count > 0)
+        {
+            // teamsWithOneMember의 리스트를 하나의 TMP_Text에 전부 표시
+            TMP_Text oneMemberText = pickWaitngMemberPanel.transform.Find("Page0/TeamWithOneMember").GetComponent<TMP_Text>();
+            oneMemberText.text = "팀원이 1명인 팀장은 ";
+            for (int i = 0; i < teamsWithOneMember.Count; i++)
+            {
+                oneMemberText.text += teamsWithOneMember[i].leader[0].name;
+                if (i < teamsWithOneMember.Count - 1)
+                {
+                    oneMemberText.text += ", ";
+                }
+            }
+            oneMemberText.text += " 입니다.";
+        }
+        else
+        {
+            TMP_Text oneMemberText = pickWaitngMemberPanel.transform.Find("Page0/TeamWithOneMember").GetComponent<TMP_Text>();
+            oneMemberText.text = "팀원이 1명인 팀장은 없습니다.";
+        }
     }
 
     //대기 목록에 있는 팀원 선정 시작
     public void StartPickWaitingMember()
     {
-        //첫번째 teamWithZeroMembers의 팀장을 선택
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
-        choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithZeroMembers[0].leader[0].name).leader[0].order;
-
-        TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
-        infoText.text = teamsWithZeroMembers[0].leader[0].name + "팀장님, 팀원을 선택해주세요.";
+        if(teamsWithZeroMembers.Count > 0)
+        {
+            //첫번째 teamWithZeroMembers의 팀장을 선택
+            choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithZeroMembers[0].leader[0].name).leader[0].order;
+            TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
+            infoText.text = teamsWithZeroMembers[0].leader[0].name + "팀장님, 팀원을 선택해주세요.";
+        }
+        else if (teamsWithOneMember.Count > 0)
+        {
+            //첫번째 teamWithOneoMember의 팀장을 선택
+            choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithOneMember[0].leader[0].name).leader[0].order;
+            TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
+            infoText.text = teamsWithOneMember[0].leader[0].name + "팀장님, 팀원을 선택해주세요.";
+        }
 
         // WaitingMember_Choice라는 프리팹을 생성, Page1의 자식인 MemberGrid의 자식으로 생성, waitingTeamMembers의 수만큼 생성
         GameObject prefab = Resources.Load<GameObject>("Prefabs/WaitingMember_Choice");
@@ -373,7 +397,6 @@ public class TeamManager : MonoBehaviour
     public void AddWaitingMemberToTeam(int memberIndex)
     {
         // 선택당한 멤버가 현재 teamWithZeroMembers의 인덱스 차례에 해당하는 팀에 추가
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         choiceManager.currentMemberIndex = memberIndex;
         Team team = teams.FirstOrDefault(t => t.leader[0].order == choiceManager.currentTeamIndex);
         TeamMember selectedMember = waitingTeamMembers.FirstOrDefault(m => m.order == choiceManager.currentMemberIndex);
@@ -403,7 +426,6 @@ public class TeamManager : MonoBehaviour
     public void CheckTeamMembersCount()
     {
         Debug.Log("CheckTeamMembersCount 메서드가 호출되었습니다.");
-        ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
         Team team = teams.FirstOrDefault(t => t.leader[0].order == choiceManager.currentTeamIndex);
         Debug.Log($"{team.leader[0].name}의 멤버 수: {team.members.Count}");
         if (teamsWithZeroMembers.Count > 0 && team.members.Count == MaxMembersPerTeam)
@@ -423,7 +445,6 @@ public class TeamManager : MonoBehaviour
     {
         if (teamsWithZeroMembers.Count > 0)
         {
-            ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithZeroMembers[0].leader[0].name).leader[0].order;
 
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
@@ -432,7 +453,6 @@ public class TeamManager : MonoBehaviour
         else if (teamsWithOneMember.Count > 0)
         {
             //첫번째 teamWithOneoMember의 팀장을 선택
-            ChoiceManager choiceManager = GameObject.Find("ChoiceManager").GetComponent<ChoiceManager>();
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithOneMember[0].leader[0].name).leader[0].order;
 
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
@@ -441,6 +461,8 @@ public class TeamManager : MonoBehaviour
         else
         {
             Debug.Log("모든 팀 매칭이 완료됐습니다.");
+            pickWaitngMemberPanel.SetActive(false);
+            showResultPanel.SetActive(true);
         }
     }
 }
