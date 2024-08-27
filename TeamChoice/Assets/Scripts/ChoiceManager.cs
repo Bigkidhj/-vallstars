@@ -11,6 +11,7 @@ public class ChoiceManager : MonoBehaviour
     public int currentTeamIndex = 10;
     public GameObject page0;
     public GameObject page1;
+    public GameObject matchingCanvas;
     public GameObject resultCanvas;
 
     public void Start()
@@ -76,6 +77,7 @@ public class ChoiceManager : MonoBehaviour
     public void ShowResultPage()
     {
         resultCanvas.SetActive(true);
+        matchingCanvas.SetActive(false);
         resultManager.InitializeResultUI();
     }
 }

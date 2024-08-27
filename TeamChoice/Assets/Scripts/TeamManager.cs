@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static TeamManager;
 
 public class TeamManager : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class TeamManager : MonoBehaviour
     public List<List<Image>> teamMemberImages;
     public List<List<TMP_Text>> teamMemberNames;
     public GameObject kickPanel;
+    public TMP_Text kickText;
     public List<Image> kickMemberImages;
     public List<TMP_Text> kickMemberNames;
     public GameObject waitingList;
@@ -89,40 +91,40 @@ public class TeamManager : MonoBehaviour
     {
         teamLeaders = new List<TeamLeader>
         {
-            new TeamLeader("팀장A", 0),
-            new TeamLeader("팀장B", 1),
-            new TeamLeader("팀장C", 2),
-            new TeamLeader("팀장D", 3),
-            new TeamLeader("팀장E", 4),
-            new TeamLeader("팀장F", 5),
-            new TeamLeader("팀장G", 6),
-            new TeamLeader("팀장H", 7),
-            new TeamLeader("팀장I", 8),
-            new TeamLeader("팀장J", 9)
+            new TeamLeader("도린", 0),
+            new TeamLeader("레아나", 1),
+            new TeamLeader("루엘", 2),
+            new TeamLeader("모모시로\n카나", 3),
+            new TeamLeader("슨아", 4),
+            new TeamLeader("아카샤", 5),
+            new TeamLeader("채다빈", 6),
+            new TeamLeader("타츠메\n유키", 7),
+            new TeamLeader("토종\n아오리", 8),
+            new TeamLeader("하얘", 9)
         };
 
         teamMembers = new List<TeamMember>
         {
-        new TeamMember("팀원1", 0, "팀원1"),
-        new TeamMember("팀원2", 1, "팀원2"),
-        new TeamMember("팀원3", 2, "팀원3"),
-        new TeamMember("팀원4", 3, "팀원4"),
-        new TeamMember("팀원5", 4, "팀원5"),
-        new TeamMember("팀원6", 5, "팀원6"),
-        new TeamMember("팀원7", 6, "팀원7"),
-        new TeamMember("팀원8", 7, "팀원8"),
-        new TeamMember("팀원9", 8, "팀원9"),
-        new TeamMember("팀원10", 9, "팀원10"),
-        new TeamMember("팀원11", 10, "팀원11"),
-        new TeamMember("팀원12", 11, "팀원12"),
-        new TeamMember("팀원13", 12, "팀원13"),
-        new TeamMember("팀원14", 13, "팀원14"),
-        new TeamMember("팀원15", 14, "팀원15"),
-        new TeamMember("팀원16", 15, "팀원16"),
-        new TeamMember("팀원17", 16, "팀원17"),
-        new TeamMember("팀원18", 17, "팀원18"),
-        new TeamMember("팀원19", 18, "팀원19"),
-        new TeamMember("팀원20", 19, "팀원20")
+        new TeamMember("그나로", 0, "그나로"),
+        new TeamMember("노이", 1, "노이"),
+        new TeamMember("뉴냥이", 2, "뉴냥이"),
+        new TeamMember("달짱", 3, "달짱"),
+        new TeamMember("디아나", 4, "디아나"),
+        new TeamMember("루잼", 5, "루잼"),
+        new TeamMember("리리스", 6, "리리스"),
+        new TeamMember("미아", 7, "미아"),
+        new TeamMember("뵤오", 8, "뵤오"),
+        new TeamMember("소요카", 9, "소요카"),
+        new TeamMember("옥쓔", 10, "옥쓔"),
+        new TeamMember("이야", 11, "이야"),
+        new TeamMember("쪼로퀸", 12, "쪼로퀸"),
+        new TeamMember("카나프", 13, "카나프"),
+        new TeamMember("카푸", 14, "카푸"),
+        new TeamMember("코오리", 15, "코오리"),
+        new TeamMember("코와가리\n리유", 16, "코와가리 리유"),
+        new TeamMember("티 야", 17, "티 야"),
+        new TeamMember("하야시\n이로", 18, "하야시 이로"),
+        new TeamMember("헤스", 19, "헤스")
         };
 
         teams = new List<Team>();
@@ -142,7 +144,10 @@ public class TeamManager : MonoBehaviour
 
         for (int i = 0; i < leaderImages.Count && i < teamLeaders.Count; i++)
         {
-            leaderImages[i].sprite = Resources.Load<Sprite>("Images/TeamLeader/" + teamLeaders[i].name);
+            //줄바꿈을 띄어쓰기로 변경
+            string content = teamLeaders[i].name;
+            string normalizedcontent = content.Replace("\n", " ");
+            leaderImages[i].sprite = Resources.Load<Sprite>("Images/TeamLeader/" + normalizedcontent);
         }
 
         teamMemberImages = new List<List<Image>>();
@@ -212,10 +217,19 @@ public class TeamManager : MonoBehaviour
         kickPanel.SetActive(true);
         // 현재 선택한 팀 호출
         Team team = teams.FirstOrDefault(t => t.leader[0].order == teamIndex);
+        string teamLeaderContent = team.leader[0].name;
+        string normalizedcontent = teamLeaderContent.Replace("\n", " ");
+        kickText.text = $"{normalizedcontent} 팀장님\n내보낼 팀원을 선택해주세요";
         // kickMemberNames에 teamindex에 해당하는 팀원 이름과 choiceManager의 currentTeamMember 이름을 넣어줌
-        kickMemberNames[0].text = team.members[0].name;
-        kickMemberNames[1].text = team.members[1].name;
-        kickMemberNames[2].text = choiceManager.currentTeamMember.name;
+        string teamMember1Content = team.members[0].name;
+        string teamMember2Content = team.members[1].name;
+        string teamMember3Content = choiceManager.currentTeamMember.name;
+        string normalized1content = teamMember1Content.Replace("\n", " ");
+        string normalized2content = teamMember2Content.Replace("\n", " ");
+        string normalized3content = teamMember3Content.Replace("\n", " ");
+        kickMemberNames[0].text = normalized1content;
+        kickMemberNames[1].text = normalized2content;
+        kickMemberNames[2].text = normalized3content;
         // kickMemberImages에 teamindex에 해당하는 팀원 이미지와 choiceManager의 currentTeamMember 이미지를 넣어줌
         kickMemberImages[0].sprite = Resources.Load<Sprite>("Images/TeamMember/" + team.members[0].imageName);
         kickMemberImages[1].sprite = Resources.Load<Sprite>("Images/TeamMember/" + team.members[1].imageName);
@@ -310,13 +324,15 @@ public class TeamManager : MonoBehaviour
             zeroMemberText.text = "팀원이 0명인 팀장은 ";
             for (int i = 0; i < teamsWithZeroMembers.Count; i++)
             {
-                zeroMemberText.text += teamsWithZeroMembers[i].leader[0].name;
+                string content = teamsWithZeroMembers[i].leader[0].name;
+                string normalizedcontent = content.Replace("\n", " ");
+                zeroMemberText.text += normalizedcontent;
                 if (i < teamsWithZeroMembers.Count - 1)
                 {
                     zeroMemberText.text += ", ";
                 }
             }
-            zeroMemberText.text += " 입니다.";
+            zeroMemberText.text += " 팀장 입니다.";
 
         }
         else
@@ -332,13 +348,15 @@ public class TeamManager : MonoBehaviour
             oneMemberText.text = "팀원이 1명인 팀장은 ";
             for (int i = 0; i < teamsWithOneMember.Count; i++)
             {
-                oneMemberText.text += teamsWithOneMember[i].leader[0].name;
+                string content = teamsWithOneMember[i].leader[0].name;
+                string normalizedcontent = content.Replace("\n", " ");
+                oneMemberText.text += normalizedcontent;
                 if (i < teamsWithOneMember.Count - 1)
                 {
                     oneMemberText.text += ", ";
                 }
             }
-            oneMemberText.text += " 입니다.";
+            oneMemberText.text += " 팀장 입니다.";
         }
         else
         {
@@ -355,13 +373,17 @@ public class TeamManager : MonoBehaviour
             //첫번째 teamWithZeroMembers의 팀장을 선택
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithZeroMembers[0].leader[0].name).leader[0].order;
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
-            infoText.text = teamsWithZeroMembers[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
+            string content = teamsWithZeroMembers[0].leader[0].name;
+            string normalizedcontent = content.Replace("\n", " ");
+            infoText.text = normalizedcontent + " 팀장님, 팀원을 선택해주세요.";
         }
         else if (teamsWithOneMember.Count > 0)
         {
             //첫번째 teamWithOneoMember의 팀장을 선택
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithOneMember[0].leader[0].name).leader[0].order;
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
+            string content = teamsWithOneMember[0].leader[0].name;
+            string normalizedcontent = content.Replace("\n", " ");
             infoText.text = teamsWithOneMember[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
         }
 
@@ -451,7 +473,9 @@ public class TeamManager : MonoBehaviour
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithZeroMembers[0].leader[0].name).leader[0].order;
 
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
-            infoText.text = teamsWithZeroMembers[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
+            string content = teamsWithZeroMembers[0].leader[0].name;
+            string normalizedcontent = content.Replace("\n", " ");
+            infoText.text = normalizedcontent + " 팀장님, 팀원을 선택해주세요.";
         }
         else if (teamsWithOneMember.Count > 0)
         {
@@ -459,7 +483,9 @@ public class TeamManager : MonoBehaviour
             choiceManager.currentTeamIndex = teams.FirstOrDefault(t => t.leader[0].name == teamsWithOneMember[0].leader[0].name).leader[0].order;
 
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
-            infoText.text = teamsWithOneMember[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
+            string content = teamsWithOneMember[0].leader[0].name;
+            string normalizedcontent = content.Replace("\n", " ");
+            infoText.text = normalizedcontent + " 팀장님, 팀원을 선택해주세요.";
         }
         else
         {

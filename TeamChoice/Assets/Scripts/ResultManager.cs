@@ -31,8 +31,10 @@ public class ResultManager : MonoBehaviour
 
         for (int i = 0; i < 10; i++)
         {
-            leaderImages[i].sprite = Resources.Load<Sprite>("Images/TeamLeader/" + teamManager.teams[i].leader[0].name);
-            leaderNames[i].text = teamManager.teams[i].leader[0].name;
+            string content = teamManager.teams[i].leader[0].name;
+            string normalizedcontent = content.Replace("\n", " ");
+            leaderImages[i].sprite = Resources.Load<Sprite>("Images/TeamLeader/" + normalizedcontent);
+            leaderNames[i].text = normalizedcontent;
         }
 
         teamMemberImages = new List<List<Image>>();
@@ -66,8 +68,11 @@ public class ResultManager : MonoBehaviour
             {
                 if (teamManager.teams[i].members.Count > j)
                 {
-                    teamMemberImages[i][j].sprite = Resources.Load<Sprite>("Images/TeamMember/" + teamManager.teams[i].members[j].name);
-                    teamMemberNames[i][j].text = teamManager.teams[i].members[j].name;
+                    // 이름에서 줄바꿈을 띄어쓰기로 변경
+                    string content = teamManager.teams[i].members[j].name;
+                    string normalizedcontent = content.Replace("\n", " ");
+                    teamMemberImages[i][j].sprite = Resources.Load<Sprite>("Images/TeamMember/" + normalizedcontent);
+                    teamMemberNames[i][j].text = normalizedcontent;
                 }
                 else
                 {
