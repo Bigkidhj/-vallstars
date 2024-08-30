@@ -332,13 +332,13 @@ public class TeamManager : MonoBehaviour
                     zeroMemberText.text += ", ";
                 }
             }
-            zeroMemberText.text += " 팀장 입니다.";
+            zeroMemberText.text += " 팀장님 입니다.";
 
         }
         else
         {
             TMP_Text zeroMemberText = pickWaitngMemberPanel.transform.Find("Page0/TeamWithZeroMembers").GetComponent<TMP_Text>();
-            zeroMemberText.text = "팀원이 0명인 팀장은 없습니다.";
+            zeroMemberText.text = "팀원이 0명인 팀장님은 없습니다.";
         }
 
         if (teamsWithOneMember.Count > 0)
@@ -356,12 +356,12 @@ public class TeamManager : MonoBehaviour
                     oneMemberText.text += ", ";
                 }
             }
-            oneMemberText.text += " 팀장 입니다.";
+            oneMemberText.text += " 팀장님 입니다.";
         }
         else
         {
             TMP_Text oneMemberText = pickWaitngMemberPanel.transform.Find("Page0/TeamWithOneMember").GetComponent<TMP_Text>();
-            oneMemberText.text = "팀원이 1명인 팀장은 없습니다.";
+            oneMemberText.text = "팀원이 1명인 팀장님은 없습니다.";
         }
     }
 
@@ -384,7 +384,7 @@ public class TeamManager : MonoBehaviour
             TMP_Text infoText = pickWaitngMemberPanel.transform.Find("Page1/InfoText").GetComponent<TMP_Text>();
             string content = teamsWithOneMember[0].leader[0].name;
             string normalizedcontent = content.Replace("\n", " ");
-            infoText.text = teamsWithOneMember[0].leader[0].name + " 팀장님, 팀원을 선택해주세요.";
+            infoText.text = normalizedcontent + " 팀장님, 팀원을 선택해주세요.";
         }
 
         // WaitingMember_Choice라는 프리팹을 생성, Page1의 자식인 MemberGrid의 자식으로 생성, waitingTeamMembers의 수만큼 생성
